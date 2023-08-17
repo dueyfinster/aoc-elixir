@@ -61,16 +61,14 @@ Calculate the horizontal position and depth you would have after following the p
 
 ```elixir
 defmodule Parser do
-  def parse(puzzle_input) do
-    puzzle_input
+  def parse(input) do
+    input
     |> String.trim()
     |> String.split()
     |> Enum.chunk_every(2, 2)
     |> Enum.into([], fn [a, b] -> %{direction: a, amount: String.to_integer(b)} end)
   end
 end
-
-Parser.parse(puzzle_input)
 ```
 
 ### Tests
@@ -115,6 +113,13 @@ defmodule PartOne do
   end
 
   def run(input) do
+    input
+    |> Enum.reduce({_depth = 0, _position = 0}, fn
+      %{direction: "forward", amount: number}, {depth, position} -> {depth, position + number}
+      %{direction: "down", amount: number}, {depth, position} -> {depth + number, position}
+      %{direction: "up", amount: number}, {depth, position} -> {depth - number, position}
+    end)
+    |> then(fn {depth, position} -> depth * position end)
   end
 end
 ```
@@ -128,7 +133,14 @@ defmodule PartOneTest do
   use ExUnit.Case, async: true
   import PartOne
 
-  @input "forward 5\ndown 5\nforward 8\nup 3\ndown 8\nforward 2"
+  @input [
+    %{direction: "forward", amount: 5},
+    %{direction: "down", amount: 5},
+    %{direction: "forward", amount: 8},
+    %{direction: "up", amount: 3},
+    %{direction: "down", amount: 8},
+    %{direction: "forward", amount: 2}
+  ]
   @expected 150
 
   test "part one" do
@@ -160,6 +172,18 @@ defmodule PartTwo do
   end
 
   def run(input) do
+    input
+    |> Enum.reduce({_depth = 0, _position = 0, _aim = 0}, fn
+      %{direction: "forward", amount: number}, {depth, position, aim} ->
+        {depth + aim * number, position + number, aim}
+
+      %{direction: "down", amount: number}, {depth, position, aim} ->
+        {depth, position, aim + number}
+
+      %{direction: "up", amount: number}, {depth, position, aim} ->
+        {depth, position, aim - number}
+    end)
+    |> then(fn {depth, position, _} -> depth * position end)
   end
 end
 ```
@@ -173,8 +197,15 @@ defmodule PartTwoTest do
   use ExUnit.Case, async: true
   import PartTwo
 
-  @input ""
-  @expected nil
+  @input [
+    %{direction: "forward", amount: 5},
+    %{direction: "down", amount: 5},
+    %{direction: "forward", amount: 8},
+    %{direction: "up", amount: 3},
+    %{direction: "down", amount: 8},
+    %{direction: "forward", amount: 2}
+  ]
+  @expected 900
 
   test "part two" do
     actual = run(@input)
@@ -188,7 +219,7 @@ ExUnit.run()
 ### Solution
 
 ```elixir
-PartTwo.resolve(puzzle_input)
+PartTwo.resolve(Parser.parse(puzzle_input))
 ```
 
-<!-- livebook:{"offset":3928,"stamp":{"token":"QTEyOEdDTQ.NQt0yeKQNU1k15YQ0At3dn3h8sqAWVNeupcw1NWdFTqxwTLL3ZQC2IrzD_w.0NI4UBTNLf4HKGy8.I5FaGMg_vHxeqxGjTc-FXuIzK47ZqMHmxam56ddhqoVsAl-3O9mxNzHN.kU2lrcNMm7guLlCxfxTcBA","version":1}} -->
+<!-- livebook:{"offset":5203,"stamp":{"token":"QTEyOEdDTQ.xPFwioxSAgE0DGoQ1VmWq0-4E9Shrq6ut-CsXl8NmUIsaywQqWF7oU5xZ8U.WTaLLJzld59VyQk_.XCEiyoNjMN_sEgrSZBy47CZbSck4euwfm6zdn2QUmzTiGO-nW5_rgldI.KWVyX4zasDfWRFMWcYegEA","version":1}} -->
