@@ -1,4 +1,4 @@
-# Advent of Code - Day 01 2021
+# Advent of Code 2021 - Day 01
 
 ```elixir
 Mix.install(
@@ -62,8 +62,7 @@ In this case tha answer is: 7
 defmodule Parser do
   def parse(puzzle_input) do
     puzzle_input
-    |> String.trim()
-    |> String.split()
+    |> String.split("\n", trim: true)
     |> Enum.map(&String.to_integer/1)
   end
 end
@@ -222,4 +221,4 @@ ExUnit.run()
 PartTwo.resolve(Parser.parse(puzzle_input))
 ```
 
-<!-- livebook:{"offset":4230,"stamp":{"token":"QTEyOEdDTQ.8OqbFsiVnFClfawDDDR5fwZ5zwYpzhDjA4G52cw6zigKWIJUneppexcwxEY.r_6l2BN6RWIocucf.UfirbkUfZdfapTZHfvtvF7hCLUkWn0HiYD-sBnxGuFnXx9PM5z9Q6Pe-.l8FO6RTk6F_mFdN5WSj9gg","version":1}} -->
+<!-- livebook:{"offset":4225,"stamp":{"token":"QTEyOEdDTQ.uEUDHOQxPIZpfkeS3PKlX3EG4vMSrVZj66igZ7YvMnj1UudebOGiXteospo.qrzNDn8fbH495h-c.jRl5WzOhtlZ9mV7fJgN3EXkR5IjAkquHsgx7S2JxQy4iYsmwvFzBPkV6.44pBbXGGkii3hfQRltwfsw","version":1}} -->
