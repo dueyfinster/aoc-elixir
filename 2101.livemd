@@ -1,4 +1,5 @@
-# Advent of Code 2021 - Day 01
+<!-- livebook:{"file_entries":[{"name":"2101.txt","type":"attachment"}]} -->
+# Advent of Code 2021 - Day 1 - Sonar Sweep
 
 ```elixir
 Mix.install(
@@ -9,7 +10,7 @@ Mix.install(
 )
 ```
 
-## Introduction - Sonar Sweep
+## Introduction
 
 Puzzle: [Sonar Sweep](https://adventofcode.com/2021/day/1)
 
@@ -220,5 +221,3 @@ ExUnit.run()
 ```elixir
 PartTwo.resolve(Parser.parse(puzzle_input))
 ```
-
-<!-- livebook:{"offset":4225,"stamp":{"token":"QTEyOEdDTQ.uEUDHOQxPIZpfkeS3PKlX3EG4vMSrVZj66igZ7YvMnj1UudebOGiXteospo.qrzNDn8fbH495h-c.jRl5WzOhtlZ9mV7fJgN3EXkR5IjAkquHsgx7S2JxQy4iYsmwvFzBPkV6.44pBbXGGkii3hfQRltwfsw","version":1}} -->

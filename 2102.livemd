@@ -1,3 +1,4 @@
+<!-- livebook:{"file_entries":[{"name":"2102.txt","type":"attachment"}]} -->
 # Advent of Code 2021 - Day 2
 
 ```elixir
